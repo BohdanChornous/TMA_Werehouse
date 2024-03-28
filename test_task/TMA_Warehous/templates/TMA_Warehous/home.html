@@ -1,0 +1,46 @@
+{% extends 'TMA_Warehous/base.html' %}
+{% block content %} 
+    <h1>Welcome to the Trade and Material Assets (TMA) Warehouse</h1>
+    {% if user.role == 0 %}
+    <div>
+        <h2>List of Goods</h2>
+    </div>
+    <div class="content-section">
+        <h2>Items</h2>
+        <p class="text-muted">Total count: {{ items.count }}</p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Group</th>
+                <th>Measurement</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Location</th>
+                <th>Contact Person</th>
+                <th>Create Order</th>
+            </tr>
+        {% for item in items %}
+                <tr>
+                    <td>{{ item.item_id }}</td>
+                    <td>{{ item.get_group }}</td>
+                    <td>{{ item.get_measurement }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.storage_location }}</td>
+                    <td>{{ item.contact_person }}</td>
+                    <td><a class="btn btn-outline-secondary" href="{% url 'new-order' %}">Order</a></td>
+                </tr>
+        {% endfor %}
+        </table>
+    </div>
+    {% elif user.role == 1 or user.role == 2 %}
+        <div class="content-section">
+            <h2><a class="nav-item nav-link" href="{% url 'list-goods' %}">List of Goods</a></h2>
+            <h2><a class="nav-item nav-link" href="{% url 'list-orders' %}">List of Requests</a></h2>
+        </div>
+    {% else %}
+        <h2>Have a great day!!!</h2>
+    {% endif %}
+{% endblock %}

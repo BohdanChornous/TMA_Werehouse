@@ -1,0 +1,27 @@
+{% extends 'TMA_Warehous/base.html' %}
+
+{% block content %}
+    <h2 class="article-title display-4">Orders Details</h2>
+    {% if user.role %}
+        <a class="btn btn-outline-info mb-4" href="{% url 'order_update' order.request_id %}">Update</a>
+        <a class="btn btn-outline-danger mb-4" href="{% url 'order_delete' order.request_id %}">Delete</a>
+    {% endif %} 
+
+    <div class="content-section">
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Item ID:</strong> {{ order.request_id }}<br>
+                    <strong>Product name:</strong> {{ order.product_name }}<br>
+                    <strong>Item ID:</strong> {{ order.item_id }}<br>
+                    <strong>Employee name:</strong> {{ order.employee_name }}<br>
+                    <strong>Measurement:</strong> {{ order.get_measurement }}<br>
+                    <strong>Quantity:</strong> {{ order.quantity}}<br>
+                    <strong>Price:</strong> {{ order.price }}<br>
+                    <strong>Comment:</strong> {{ order.comment }}<br>
+                    <strong>Status:</strong> {{ order.get_status }}<br>
+                </p>
+            </div>
+    </div>
+    <a class="btn btn-outline-info btn-lg" href="{% url 'list-orders' %}">Back to books</a>
+
+{% endblock content %}

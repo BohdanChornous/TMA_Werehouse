@@ -1,0 +1,26 @@
+{% extends 'TMA_Warehous/base.html' %}
+
+{% block content %}
+    <h2 class="article-title display-4">Item Details</h2>
+    {% if user.role %}
+        <a class="btn btn-outline-info mb-4" href="{% url 'item_update' item.item_id %}">Update</a>
+        <a class="btn btn-outline-danger mb-4" href="{% url 'item_delete' item.item_id %}">Delete</a>
+    {% endif %} 
+
+    <div class="content-section">
+            <div class="card-body">
+                <p class="card-text">
+                    <strong>Item ID:</strong> {{ item.item_id }}<br>
+                    <strong>Group:</strong> {{ item.get_group }}<br>
+                    <strong>Measurement:</strong> {{ item.get_measurement }}<br>
+                    <strong>Quantity:</strong> {{ item.quantity }}<br>
+                    <strong>Price:</strong> {{ item.price }}<br>
+                    <strong>Status:</strong> {{ item.status}}<br>
+                    <strong>Location:</strong> {{ item.storage_location }}<br>
+                    <strong>Contact Person:</strong> {{ item.contact_person }}<br>
+                </p>
+            </div>
+    </div>
+    <a class="btn btn-outline-info btn-lg" href="{% url 'list-goods' %}">Back to books</a>
+
+{% endblock content %}

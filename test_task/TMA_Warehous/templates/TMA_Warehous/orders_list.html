@@ -1,0 +1,42 @@
+{% extends 'TMA_Warehous/base.html' %}
+
+{% block content %}
+    <div>
+        {% if user.role == 2 %}
+            <h1>List of Orders</h1>
+            <a class="btn btn-outline-info btn-lg mb-4" href="{% url 'new-order' %}">Add new goods</a>
+        {% else %}
+            <h1>List of Orders</h1>
+        {% endif%}
+    </div>
+    <div class="content-section">
+        <h1>Items</h1>
+        <p class="text-muted">Total count: {{ orders.count }}</p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Item Id</th>
+                <th>Employee Name</th>
+                <th>Measurement</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Comment</th>
+                <th>Status</th>
+            </tr>
+        {% for order in orders %}
+                <tr>
+                    <td><a href="{% url 'order_detail' order.request_id %}">{{ order.request_id }}</a></td>
+                    <td>{{ order.product_name }}</td>
+                    <td>{{ order.item_id }}</td>
+                    <td>{{ order.employee_name }}</td>
+                    <td>{{ order.get_measurement}}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.price }}</td>
+                    <td>{{ order.comment }}</td>
+                    <td>{{ order.get_status }}</td>
+                </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
